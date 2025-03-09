@@ -36,7 +36,7 @@ public class pipeBehavior : MonoBehaviour
     void FixedUpdate()
     {
         // _pipeSpeed = GameManager.Instance.pipeSpeed; // should not acess gamemanager
-        rb.velocity = new Vector2(-1 * _pipeSpeed, 0);
+        rb.linearVelocity = new Vector2(-1 * _pipeSpeed, 0);
     }
 
 

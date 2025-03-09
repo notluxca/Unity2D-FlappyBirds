@@ -51,7 +51,7 @@ public class birdController : MonoBehaviour
 
     public void TiltBird()
     {
-        transform.rotation = Quaternion.Euler(0, 0, rb.velocity.y * rotationSpeed);
+        transform.rotation = Quaternion.Euler(0, 0, rb.linearVelocity.y * rotationSpeed);
     }
 
     //todo: diminuir este nest de ifs
@@ -88,7 +88,7 @@ public class birdController : MonoBehaviour
         if (!isDead)
         {
             GameManager.Instance.PlaySound(birdFlapSound);
-            rb.velocity = new Vector2(rb.velocity.x, 0);
+            rb.linearVelocity = new Vector2(rb.linearVelocity.x, 0);
             rb.AddForce(Vector3.up * jumpForce, ForceMode2D.Impulse);
         }
 

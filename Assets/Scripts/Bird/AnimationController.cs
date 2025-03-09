@@ -17,10 +17,10 @@ public class AnimationController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(rb.velocity.y < 0){
+        if(rb.linearVelocity.y < 0){
             animator.SetTrigger("Falling");
             animator.ResetTrigger("GoingUp");
-        } else if(rb.velocity.y > 0.1) {
+        } else if(rb.linearVelocity.y > 0.1) {
             animator.SetTrigger("GoingUp");
             animator.ResetTrigger("Falling");
 
