@@ -38,12 +38,12 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
-  serializedVersion: 12
+  serializedVersion: 13
+  m_BakeOnSceneLoad: 0
   m_GISettings:
     serializedVersion: 2
     m_BounceScale: 1
@@ -296,13 +296,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b470cca06a412ca42a9fb0de24cd6eaf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pipeGroups:
-  - GroupName: 
-    pipes: []
-  pipe: {fileID: 7239197699780844487, guid: 295d7528b1c2d3040a2d427250fb7774, type: 3}
-  pipeWithSaw: {fileID: 7239197699780844487, guid: a14be892b43fd814485bb2a43e968d65, type: 3}
+  pipeSpawnPosition: {fileID: 410318030}
   pipeSpawnDelay: 1.6
   SpawnPipes: 1
+  pipe: {fileID: 7239197699780844487, guid: 295d7528b1c2d3040a2d427250fb7774, type: 3}
+  pipeWithSaw: {fileID: 7239197699780844487, guid: a14be892b43fd814485bb2a43e968d65, type: 3}
 --- !u!1 &383463712
 GameObject:
   m_ObjectHideFlags: 8
@@ -359,7 +357,7 @@ Transform:
   m_GameObject: {fileID: 410318030}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 8.78, y: -0.2, z: -0.8210087}
+  m_LocalPosition: {x: 5.42, y: -0.2, z: -0.8210087}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -664,6 +662,7 @@ SpriteRenderer:
   m_RayTraceProcedural: 0
   m_RayTracingAccelStructBuildFlagsOverride: 0
   m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -835,6 +834,7 @@ ParticleSystemRenderer:
   m_RayTraceProcedural: 0
   m_RayTracingAccelStructBuildFlagsOverride: 0
   m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -5686,7 +5686,7 @@ GameObject:
   - component: {fileID: 1170178377}
   - component: {fileID: 1170178376}
   m_Layer: 5
-  m_Name: InGameScreen
+  m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5814,6 +5814,7 @@ SpriteRenderer:
   m_RayTraceProcedural: 0
   m_RayTracingAccelStructBuildFlagsOverride: 0
   m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -5923,7 +5924,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   width: 25
-  speed: 5
+  speed: 2
 --- !u!1 &1540977762
 GameObject:
   m_ObjectHideFlags: 0
@@ -5942,7 +5943,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!212 &1540977763
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -5962,6 +5963,7 @@ SpriteRenderer:
   m_RayTraceProcedural: 0
   m_RayTracingAccelStructBuildFlagsOverride: 0
   m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -6088,6 +6090,7 @@ SpriteRenderer:
   m_RayTraceProcedural: 0
   m_RayTracingAccelStructBuildFlagsOverride: 0
   m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -6132,7 +6135,7 @@ Transform:
   m_GameObject: {fileID: 1815486209}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.58, y: -0.22, z: 0}
+  m_LocalPosition: {x: -0.82, y: -0.22, z: 0}
   m_LocalScale: {x: 2, y: 2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -6174,7 +6177,7 @@ CircleCollider2D:
   m_CompositeOperation: 0
   m_CompositeOrder: 0
   m_Offset: {x: -0.007933117, y: 0}
-  m_Radius: 0.116734736
+  m_Radius: 0.09
 --- !u!95 &1815486213
 Animator:
   serializedVersion: 7
@@ -6199,7 +6202,7 @@ Animator:
   m_WriteDefaultValuesOnDisable: 0
 --- !u!50 &1815486214
 Rigidbody2D:
-  serializedVersion: 4
+  serializedVersion: 5
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -6210,8 +6213,8 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 3
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
   m_GravityScale: 2
   m_Material: {fileID: 0}
   m_IncludeLayers:
@@ -6434,6 +6437,7 @@ SpriteRenderer:
   m_RayTraceProcedural: 0
   m_RayTracingAccelStructBuildFlagsOverride: 0
   m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -6528,9 +6532,9 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 1170178379}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 709.5}
+  m_AnchorMin: {x: 0.5, y: 1}
+  m_AnchorMax: {x: 0.5, y: 1}
+  m_AnchoredPosition: {x: 0, y: -124.900024}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2067098641

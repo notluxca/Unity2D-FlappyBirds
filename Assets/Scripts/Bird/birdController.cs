@@ -2,7 +2,7 @@ using System;
 using System.Collections;
 using UnityEngine;
 
-public class birdController : MonoBehaviour
+public class BirdController : MonoBehaviour
 {
 
     [Header("Basic Infos")]
@@ -36,13 +36,10 @@ public class birdController : MonoBehaviour
 
     void Awake()
     {
-
         hasStartedGame = false;
         rb = GetComponent<Rigidbody2D>();
         rb.constraints = RigidbodyConstraints2D.FreezePositionY;
         canJump = true;
-        // RigidbodyConstraints.None; 
-
     }
     private void FixedUpdate()
     {
@@ -54,50 +51,33 @@ public class birdController : MonoBehaviour
         transform.rotation = Quaternion.Euler(0, 0, rb.linearVelocity.y * rotationSpeed);
     }
 
-    //todo: diminuir este nest de ifs
     void Update()
     {
-        if (Input.anyKeyDown)
+        if (Input.GetMouseButtonDown(0) && !isDead && canJump)
         {
-            if (canJump)
+            Jump();
+            if (hasStartedGame == false)
             {
-                if (isDead)
-                {
-                    GameManager.Instance.RestartGame();
-                    isDead = false;
-                }
-
-                if (hasStartedGame)
-                {
-                    Jump();
-                }
-                else
-                {
-                    GameManager.Instance.StartGame();
-                    GameManager.Instance?.PlaySound(startWoosh);
-                    hasStartedGame = true;
-                    unlockBird();
-                    Jump();
-                }
+                hasStartedGame = true;
+                GameEvents.TriggerGameStarted();
+                GameManager.Instance?.PlaySound(startWoosh);
+                unlockBird();
+                Jump();
             }
         }
+
     }
 
     void Jump()
     {
-        if (!isDead)
-        {
-            GameManager.Instance.PlaySound(birdFlapSound);
-            rb.linearVelocity = new Vector2(rb.linearVelocity.x, 0);
-            rb.AddForce(Vector3.up * jumpForce, ForceMode2D.Impulse);
-        }
-
+        GameManager.Instance.PlaySound(birdFlapSound);
+        rb.linearVelocity = new Vector2(rb.linearVelocity.x, 0);
+        rb.AddForce(Vector3.up * jumpForce, ForceMode2D.Impulse);
     }
 
     void unlockBird()
     {
         rb.constraints = RigidbodyConstraints2D.None;
-
     }
 
     // toca o efeito de sangue, sons de morte, trava a posição do player, spawna todas as partes do corpo.
@@ -116,8 +96,7 @@ public class birdController : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D other)
     {
-        print(message: $"PlayerCollided With Obstacle: {other.transform.gameObject.tag}");
-        OnPlayerDied?.Invoke(); // GameManager.Instance.LoseGame();
+        OnPlayerDied?.Invoke();  //fix move to playerEvents
         if (other.gameObject.transform.CompareTag("Obstacle"))
         {
             ExplodeBird();
@@ -134,21 +113,8 @@ public class birdController : MonoBehaviour
     // player is only on trigger mode when he is already dead
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.CompareTag("pointZone"))
-        {
-            OnPlayerScored?.Invoke();
-            // GameManager.Instance.AddPoint(1);
-            // GameManager.Instance.PlaySound(pointSound);
-        }
-        if (other.gameObject.CompareTag("Ground"))
-        {
-            ExplodeBird();
-        }
-
+        if (other.gameObject.CompareTag("pointZone")) GameEvents.TriggerScoreAdded(1);
+        if (other.gameObject.CompareTag("Ground")) ExplodeBird();
     }
 
-    IEnumerator birdCoolDown()
-    {
-        yield return new WaitForSeconds(jumpCooldown);
-    }
 }

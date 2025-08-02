@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -14,7 +15,16 @@ public class loopGround : MonoBehaviour
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
         startSize = new Vector2(spriteRenderer.size.x, spriteRenderer.size.y);
+    }
 
+    void OnEnable()
+    {
+        BirdController.OnPlayerDied += StopLooping;
+    }
+
+    private void StopLooping()
+    {
+        speed = 0;
     }
 
     void Update()

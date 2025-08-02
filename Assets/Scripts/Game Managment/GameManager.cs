@@ -63,7 +63,7 @@ public class GameManager : MonoBehaviour
 
     void OnEnable()
     {
-        birdController.OnPlayerScored += AddPoint;
+        BirdController.OnPlayerScored += AddPoint;
     }
 
     void InitializeAllReferences()
