@@ -20,8 +20,8 @@ public class PipeSpawner : MonoBehaviour
 
     void OnDisable()
     {
-        GameEvents.OnGameStarted += StartSpawning;
-        BirdController.OnPlayerDied += StopSpawning;
+        GameEvents.OnGameStarted -= StartSpawning;
+        BirdController.OnPlayerDied -= StopSpawning;
     }
 
     void StartSpawning()

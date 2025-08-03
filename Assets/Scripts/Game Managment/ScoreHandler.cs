@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class ScoreHandler : MonoBehaviour
 {
-
     private int score;
 
     void Awake()

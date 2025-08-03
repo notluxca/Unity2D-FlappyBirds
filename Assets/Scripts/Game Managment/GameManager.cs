@@ -1,7 +1,6 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using TMPro;
 
 
 
@@ -17,6 +16,7 @@ public class GameManager : MonoBehaviour
 
     [Header("References")]
     public GameObject player;
+    [SerializeField] TransitionController transitionAnimator;
     // public GameObject startScreen;
     // public GameObject blackScreen;
     // public TMP_Text scoreText;
@@ -58,7 +58,13 @@ public class GameManager : MonoBehaviour
             DontDestroyOnLoad(gameObject);
         }
         Application.targetFrameRate = 120;
-        InitializeAllReferences();
+        SceneManager.sceneLoaded += (scene, mode) =>
+        {
+            if (scene.buildIndex == 0) // Assuming 0 is the main menu or starting scene
+            {
+                InitializeAllReferences();
+            }
+        };
     }
 
     void OnEnable()
@@ -71,7 +77,8 @@ public class GameManager : MonoBehaviour
         gameRunning = true;
         // pipeOldSpeed = pipeSpeed;
         audioSorce = GetComponent<AudioSource>();
-        score = 0;
+        player = GameObject.FindGameObjectWithTag("Player");
+        transitionAnimator = FindAnyObjectByType<TransitionController>();
     }
 
     public void StartGame()
@@ -95,12 +102,6 @@ public class GameManager : MonoBehaviour
         StartCoroutine(LostSequenceNoJump());
     }
 
-    // public void fadeOffStartScreen()
-    // {
-    //     startScreen = GameObject.Find("message");
-    //     startScreen.GetComponent<Animator>().SetTrigger("fadeOffTrigger");
-    // }
-
     public void AddPoint()
     {
         score += 1;
@@ -118,6 +119,7 @@ public class GameManager : MonoBehaviour
     {
         // pipeOldSpeed = pipeSpeed;
         // pipeSpeed = 0;
+        RestartGame();
         player.GetComponent<CircleCollider2D>().isTrigger = true;
         player.GetComponent<Rigidbody2D>().AddForce(new Vector2(9, 16f), ForceMode2D.Impulse);
         gameRunning = false;
@@ -136,9 +138,10 @@ public class GameManager : MonoBehaviour
     IEnumerator RestartTransition()
     {
         gameRunning = false;
-        // blackScreen.GetComponent<Animator>().SetTrigger("Start");
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(1.5f);
         // pipeSpeed = pipeOldSpeed;
+        transitionAnimator.StartTransition();
+        yield return new WaitForSeconds(1f);
         SceneManager.LoadScene(0);
         InitializeAllReferences();
 

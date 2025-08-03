@@ -1,0 +1,2 @@
+C:\Users\Notluxca\Documents\GitHub\FlappyBirds\Library\Bee\Android\Prj\IL2CPP\Gradle\unityLibrary\src\main\cpp\CMakeLists.txt
+C:\Users\Notluxca\Documents\GitHub\FlappyBirds\Library\Bee\Android\Prj\IL2CPP\Gradle\unityLibrary\src\main\cpp\FramePacing\CMakeLists.txt
