@@ -53,7 +53,8 @@ public class BirdController : MonoBehaviour
 
     void Update()
     {
-        if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began && !isDead && canJump)
+        // if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began && !isDead && canJump)
+        if (Input.GetMouseButtonDown(0) && !isDead && canJump)
         {
             Jump();
             if (hasStartedGame == false)
@@ -62,7 +63,7 @@ public class BirdController : MonoBehaviour
                 GameEvents.TriggerGameStarted();
                 GameManager.Instance?.PlaySound(startWoosh);
                 unlockBird();
-                Jump();
+                // Jump();
             }
         }
     }

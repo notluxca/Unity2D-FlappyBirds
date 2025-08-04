@@ -21,7 +21,7 @@ public class GameManager : MonoBehaviour
     // public GameObject blackScreen;
     // public TMP_Text scoreText;
     private bool gameRunning;
-    private AudioSource audioSorce;
+    [SerializeField] private AudioSource audioSorce;
 
     // Property to access the instance of the GameManager
     public static GameManager Instance
@@ -76,7 +76,7 @@ public class GameManager : MonoBehaviour
     {
         gameRunning = true;
         // pipeOldSpeed = pipeSpeed;
-        audioSorce = GetComponent<AudioSource>();
+        // audioSorce = GetComponent<AudioSource>();
         player = GameObject.FindGameObjectWithTag("Player");
         transitionAnimator = FindAnyObjectByType<TransitionController>();
     }
